@@ -439,8 +439,19 @@ command! MyCtrlPTag call MyCtrlPTag()
 nmap <C-g> :MyCtrlPTag<cr>
 imap <C-g> <esc>:MyCtrlPTag<cr>
 
-nmap <C-b> :CtrlPCurWD<cr>
-imap <C-b> <esc>:CtrlPCurWD<cr>
+" On both Ubuntu 18.04, Cygwin, and Msys, if you press Ctrl-B, vim locks up
+" for 65 seconds, showing CtrlPCurWD at the bottom of the screen, with a
+" number slowly increasing on the line above it. The number counts up to
+" 127016 and then displays the following message in inverse red on the bottom
+" of the screen:
+" Error detected while processing function ctrlp#init[22]..ctrlp#setlines[8]\
+" ..ctrlp#files[8]..<SNR>127_GlobPath[6]..<SNR>127_GlobPath[6]..<SNR>\
+" 127_GlobPath[6]..<SNR>127_GlobPath[6]..<SNR>127_GlobPath[6]..<SNR>127_Glo
+"
+" Commenting out the following lines fixes the issue:
+
+" nmap <C-b> :CtrlPCurWD<cr>
+" imap <C-b> <esc>:CtrlPCurWD<cr>
 
 " ==================== Fugitive ====================
 nnoremap <leader>ga :Git add %:p<CR><CR>
